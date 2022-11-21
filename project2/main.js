@@ -137,6 +137,5 @@ function draw() {
         // player.y -= 7
         console.log('3')
     }
-    // console.log(floor, player.y)
 };
 

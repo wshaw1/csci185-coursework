@@ -3,19 +3,36 @@ const canvasHeight = window.innerHeight;
 
 function setup() {
     createCanvas(canvasWidth, canvasHeight);
+    mouseX = canvasWidth/2;
+    mouseY = (canvasHeight/8)*7;
 };
 
 let player = {
-    x: 400,
+    x: 200,
     y: 200,
     speedX: 0, 
     speedY: 0
 };
 
 let platforms = [
-    {leftX: 300, rightX: 600, y: 400},
-    {leftX: 600, rightX: 900, y: 300},
+    [
+        {leftX: 0, rightX: canvasWidth, y: 350},
+    ],[
+        {leftX: 0, rightX: 400, y: 350},
+        {leftX: 500, rightX: 600, y: 250},
+        {leftX: 800, rightX: 900, y: 200},
+        {leftX: 1100, rightX: 1200, y: 200},
+        {leftX: 1400, rightX: 1500, y: 200},
+    ], [
+        {leftX: 0, rightX: 400, y: 350},
+        {leftX: 500, rightX: 600, y: 250},
+        {leftX: 800, rightX: 900, y: 400},
+        {leftX: 1100, rightX: 1200, y: 450},
+        {leftX: 1400, rightX: 1500, y: 400},
+    ]
 ];
+
+let level = 0;
 
 function heart(x, y, size) {
     beginShape();
@@ -59,6 +76,14 @@ function makeCloud(cloudx, cloudy) {
     makeCloud(403, 123);
     makeCloud(230, 370);
 }
+
+function platform(leftX, rightX, y){
+    fill('green');
+    rect(leftX, y, rightX-leftX, (rightX-leftX)/16);
+    fill('#3B2521')
+    rect(leftX+(rightX-leftX)/16, y+(rightX-leftX)/16, (rightX-leftX)-(rightX-leftX)/8, (rightX-leftX)/16)
+}
+
 let floor = 0;
 
 function draw() {
@@ -68,27 +93,30 @@ function draw() {
 
     strokeWeight(1);
 
-    for (i = 0; i < platforms.length; i++) {
-        line(platforms[i].leftX, platforms[i].y, platforms[i].rightX, platforms[i].y)
+    for (i = 0; i < platforms[level].length; i++) {
+        line(platforms[level][i].leftX, platforms[level][i].y, platforms[level][i].rightX, platforms[level][i].y)
+        platform(platforms[level][i].leftX, platforms[level][i].rightX, platforms[level][i].y)
     };
 
-    for (i = 0; i < platforms.length; i++) {
-        if (player.x > platforms[i].leftX && player.x < platforms[i].rightX && player.y < platforms[i].y) {
-            floor = platforms[i].y-50;
+    for (i = 0; i < platforms[level].length; i++) {
+        if (player.x > platforms[level][i].leftX && player.x < platforms[level][i].rightX && player.y < platforms[level][i].y) {
+            floor = platforms[level][i].y-50;
             console.log('platform set', i)
             break
         } else {
-            floor = (canvasHeight/2)-50;
-        };
+            // floor = ((canvasHeight/4)*3)-50;
+            floor = canvasHeight;
+
+        };2
     };
 
    
     // console.log(floor)
     // console.log(player.x, player.y)
 
-    line(canvasWidth/3, canvasHeight/2, canvasWidth/3, canvasHeight);
-    line((canvasWidth/3)*2, canvasHeight/2, (canvasWidth/3)*2, canvasHeight);
-    line(0, canvasHeight/2, canvasWidth, canvasHeight/2);
+    line(canvasWidth/3, (canvasHeight/4)*3, canvasWidth/3, canvasHeight);
+    line((canvasWidth/3)*2, (canvasHeight/4)*3, (canvasWidth/3)*2, canvasHeight);
+    line(0, (canvasHeight/4)*3, canvasWidth, (canvasHeight/4)*3);
 
     player.x += player.speedX;
     player.y += player.speedY;
@@ -96,7 +124,7 @@ function draw() {
     // floor = (canvasHeight/2)-50;
 
     let jump = false;
-    if (mouseY < floor+50) {
+    if (mouseY < (canvasHeight/4)*3) {
         jump = true;
         console.log('true');
     } else {
@@ -136,6 +164,17 @@ function draw() {
         player.y = floor-10
         // player.y -= 7
         console.log('3')
+    }
+
+    if (player.y > canvasHeight-100 || player.x < 0){
+        player.x = 200;
+        player.y = 200;
+    };
+
+    if (player.x > canvasWidth) {
+        player.x = 200;
+        player.y = 200;
+        level++;
     }
 };
 

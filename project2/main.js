@@ -1,12 +1,15 @@
+// Henry
 const canvasWidth = window.innerWidth;
 const canvasHeight = window.innerHeight; 
 
+// Henry
 function setup() {
     createCanvas(canvasWidth, canvasHeight);
     mouseX = canvasWidth/2;
     mouseY = (canvasHeight/8)*7;
 };
 
+// Henry
 let player = {
     x: 200,
     y: 200,
@@ -14,6 +17,7 @@ let player = {
     speedY: 0
 };
 
+// Henry
 let platforms = [
     [
         {leftX: 0, rightX: canvasWidth, y: 350},
@@ -36,8 +40,8 @@ let platforms = [
 
     ]
 ];
-
 let level = 0;
+
 
 function heart(x, y, size) {
     beginShape();
@@ -230,10 +234,9 @@ function createNumbers(x, y, life){
     }
 }
 
+// Henry
 let floor = 0;
-
 let lives = 10;
-
 function draw() {
     clear();
     landscape(c1x, c1y, c2x, c2y, c3x, c3y, c4x, c4y, c5x, c5y, c6x, c6y, c7x, c7y, c8x, c8y);
@@ -249,19 +252,12 @@ function draw() {
     for (i = 0; i < platforms[level].length; i++) {
         if (player.x > platforms[level][i].leftX && player.x < platforms[level][i].rightX && player.y < platforms[level][i].y) {
             floor = platforms[level][i].y-50;
-            // console.log('platform set', i)
             break
         } else {
-            // floor = ((canvasHeight/4)*3)-50;
             floor = canvasHeight;
 
-        };2
+        };
     };
-
-   
-    // console.log(floor)
-    // console.log(player.x, player.y)
-
     line(canvasWidth/3, (canvasHeight/4)*3, canvasWidth/3, canvasHeight);
     line((canvasWidth/3)*2, (canvasHeight/4)*3, (canvasWidth/3)*2, canvasHeight);
     line(0, (canvasHeight/4)*3, canvasWidth, (canvasHeight/4)*3);
@@ -274,7 +270,6 @@ function draw() {
     player.x += player.speedX;
     player.y += player.speedY;
 
-    // floor = (canvasHeight/2)-50;
 
     let jump = false;
     if (mouseY < (canvasHeight/4)*3) {
@@ -310,7 +305,6 @@ function draw() {
         };
     } else if (player.y > floor) {
         player.y = floor-10
-        // player.y -= 7
     };
 
     if (player.y > ((canvasHeight/4)*3)-50 || player.x < 0){

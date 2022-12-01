@@ -42,7 +42,7 @@ let platforms = [
 ];
 let level = 0;
 
-
+// Davin
 function heart(x, y, size) {
     beginShape();
     vertex(x, y);
@@ -51,6 +51,7 @@ function heart(x, y, size) {
     endShape(CLOSE);
 };
 
+// Davin
 function drawCreature(positionX, positionY, size, primaryColor, secondaryColor) {
     fill(primaryColor);
     heart(positionX, positionY, size); //body
@@ -64,9 +65,7 @@ function drawCreature(positionX, positionY, size, primaryColor, secondaryColor) 
     line(positionX-size*4/24, positionY+size/1.7, positionX+size*4/24, positionY+size/1.7)
 };
 
-
-
-
+// Davin
 function makeCloud(cloudx, cloudy) {
     fill('hotpink')
     strokeWeight(0);
@@ -75,6 +74,7 @@ function makeCloud(cloudx, cloudy) {
     ellipse(cloudx - 20, cloudy + 10, 70, 50);
 } 
 
+// Davin
 let c1x = Math.random() * canvasWidth;
 let c1y = Math.random() * canvasHeight;
 let c2x = Math.random() * canvasWidth;
@@ -92,6 +92,7 @@ let c7y = Math.random() * canvasHeight;
 let c8x = Math.random() * canvasWidth;
 let c8y = Math.random() * canvasHeight;
 
+// Davin
 function cloudRandomize() {
     c1x = Math.random() * canvasWidth;
     c1y = Math.random() * canvasHeight;
@@ -111,6 +112,7 @@ function cloudRandomize() {
     c8y = Math.random() * canvasHeight;
 }
 
+// Davin
 function landscape(c1x, c1y, c2x, c2y, c3x, c3y, c4x, c4y, c5x, c5y, c6x, c6y, c7x, c7y, c8x, c8y) {
     
     makeCloud(c1x, c1y);
@@ -123,6 +125,7 @@ function landscape(c1x, c1y, c2x, c2y, c3x, c3y, c4x, c4y, c5x, c5y, c6x, c6y, c
     makeCloud(c8x, c8y);
 }
 
+// Davin
 function platform(leftX, rightX, y){
     fill('green');
     rect(leftX, y, rightX-leftX, (rightX-leftX)/16);
@@ -130,6 +133,7 @@ function platform(leftX, rightX, y){
     rect(leftX+(rightX-leftX)/16, y+(rightX-leftX)/16, (rightX-leftX)-(rightX-leftX)/8, (rightX-leftX)/16)
 }
 
+// Davin
 function createNumbers(x, y, life){
 
     if(life == 10){
